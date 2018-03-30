@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  eos:
+    build:
+      context: ./eos
+    image: eosio/eos
+    command: /opt/eosio/bin/nodeos.sh
+    ports:
+      - ${HTTP_PORT}:8888
+      - ${NODE_PORT}:9876
+    expose:
+      - "8888"
+    volumes:
+      - ./data-dir:/opt/eosio/bin/data-dir
+      - ./config-dir:/opt/eosio/bin/config-dir
+
+  walletd:
+    image: eosio/eos
+    command: /opt/eosio/bin/eosiowd
+    links:
+      - eos
+    volumes:
+      - ./data-dir:/opt/eosio/bin/data-dir
+      - ./config-dir:/opt/eosio/bin/config-dir
