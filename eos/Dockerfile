@@ -64,8 +64,9 @@ RUN tar -xzf eos.tar.gz \
     && cd eos \
     && cmake -H. -B"/tmp/build" -GNinja -DCMAKE_BUILD_TYPE=Release -DWASM_ROOT=/opt/wasm -DCMAKE_CXX_COMPILER=clang++ \
        -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=/tmp/build  -DSecp256k1_ROOT_DIR=/usr/local \
-    && cmake --build /tmp/build --target install \
-    && mkdir -p /opt/eosio/ \
+    && cmake --build /tmp/build --target install
+RUN mkdir -p /opt/eosio/ \
+    && cp -r /tmp/build/share /opt/eosio/share \
     && cp -r /tmp/build/bin /opt/eosio/bin \
     && cp -r /tmp/build/contracts /contracts \
     && rm -rf /tmp/build && rm -rf /eos
@@ -76,11 +77,12 @@ COPY sources.list /etc/apt/sources.list
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssl && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local/lib/* /usr/local/lib/
-COPY --from=builder /opt/eosio/bin /opt/eosio/bin
+COPY --from=builder /opt/eosio /opt/eosio
 COPY --from=builder /contracts /contracts
 COPY nodeos.sh /opt/eosio/bin/nodeos.sh
 ENV EOSIO_ROOT=/opt/eosio
 RUN chmod +x /opt/eosio/bin/nodeos.sh
+RUN sed -i.bak 's/-I $filePath/-I $filePath -I $filePath\/../g' /opt/eosio/bin/eosiocpp
 ENV LD_LIBRARY_PATH /usr/local/lib
 VOLUME /opt/eosio/bin/data-dir
 VOLUME /opt/eosio/bin/config-dir
