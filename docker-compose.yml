@@ -17,7 +17,7 @@ services:
 
   walletd:
     image: eosio/eos
-    command: /opt/eosio/bin/eosiowd
+    command: /opt/eosio/bin/keosd
     links:
       - eos
     volumes:
