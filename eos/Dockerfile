@@ -59,7 +59,7 @@ RUN tar -xzf mongo-cxx-driver-r3.2.0.tar.gz \
     && cmake -H. -Bbuild -G Ninja -DCMAKE_BUILD_TYPE=Release  -DCMAKE_INSTALL_PREFIX=/usr/local\
     && cmake --build build --target install
 
-RUN git clone -b DAWN-2018-03-30-ALPHA --depth 1 https://github.com/EOSIO/eos.git --recursive \
+RUN git clone -b dawn-v3.0.0 --depth 1 https://github.com/EOSIO/eos.git --recursive \
     && cd eos \
     && cmake -H. -B"/tmp/build" -GNinja -DCMAKE_BUILD_TYPE=Release -DWASM_ROOT=/opt/wasm -DCMAKE_CXX_COMPILER=clang++ \
        -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=/tmp/build  -DSecp256k1_ROOT_DIR=/usr/local \

@@ -1,5 +1,5 @@
 # eos-dawn3.x docker配置
-> EOS Dawn 2018-03-23
+> EOS Dawn 3.0
 ## Configurate
 ```shell
 cp .env.example .env
