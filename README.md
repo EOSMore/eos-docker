@@ -1,5 +1,11 @@
 # eos-dawn3.x docker配置
 > EOS Dawn 3.0
+## Get
+```shell
+git clone -b alpha https://github.com/shrimpliu/eos-dawn3-docker.git
+cd eos-dawn3-docker/
+git lfs pull
+```
 ## Configurate
 ```shell
 cp .env.example .env
