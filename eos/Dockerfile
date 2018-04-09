@@ -77,7 +77,7 @@ COPY sources.list /etc/apt/sources.list
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssl && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local/lib/* /usr/local/lib/
 COPY --from=builder /opt/eosio /opt/eosio
-COPY --from=builder /contracts /contracts
+COPY --from=builder /contracts /opt/eosio/bin/contracts
 COPY nodeos.sh /opt/eosio/bin/nodeos.sh
 ENV EOSIO_ROOT=/opt/eosio
 RUN chmod +x /opt/eosio/bin/nodeos.sh
@@ -85,4 +85,6 @@ RUN sed -i.bak 's/-I $filePath/-I $filePath -I $filePath\/../g' /opt/eosio/bin/e
 ENV LD_LIBRARY_PATH /usr/local/lib
 VOLUME /opt/eosio/bin/data-dir
 VOLUME /opt/eosio/bin/config-dir
+VOLUME /opt/eosio/bin/contracts
 ENV PATH /opt/eosio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+WORKDIR /opt/eosio/bin
