@@ -1,9 +1,7 @@
 #!/bin/sh
 cd /opt/eosio/bin
 
-if [ -d '/opt/eosio/bin/contracts' ]; then
-    echo
-  else
+if [ "`ls -A /opt/eosio/bin/contracts`" = "" ]; then
     cp -r /contracts /opt/eosio/bin
 fi
 
