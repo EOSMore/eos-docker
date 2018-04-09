@@ -1,6 +1,12 @@
 #!/bin/sh
 cd /opt/eosio/bin
 
+if [ -d '/opt/eosio/bin/contracts' ]; then
+    echo
+  else
+    cp -r /contracts /opt/eosio/bin
+fi
+
 DATA_DIR=/opt/eosio/bin/data-dir
 CONFIG_DIR=/opt/eosio/bin/config-dir
 
