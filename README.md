@@ -25,5 +25,6 @@ docker-compose up -d
 ```
 ## Run cleos (EOS Client)
 ```shell
-./cleos.sh
+alias cleos='docker-compose exec eos cleos'
+cleos get info
 ```
