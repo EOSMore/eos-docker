@@ -1,5 +1,9 @@
 .DS_Store
 
+.idea/
 .env
 data-dir/*
 contracts/*
+
+*.json
+*.info
