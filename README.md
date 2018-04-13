@@ -1,5 +1,5 @@
 # eos-dawn3.x docker配置
-> EOS Dawn 2018-03-23
+> EOS Dawn 3.0
 ## Get
 ```shell
 git clone -b alpha https://github.com/shrimpliu/eos-dawn3-docker.git
@@ -25,5 +25,6 @@ docker-compose up -d
 ```
 ## Run cleos (EOS Client)
 ```shell
-./cleos.sh
+alias cleos='docker-compose exec eos cleos'
+cleos get info
 ```

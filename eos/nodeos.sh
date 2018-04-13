@@ -1,10 +1,11 @@
 #!/bin/sh
 cd /opt/eosio/bin
 
-if [ -d '/opt/eosio/bin/data-dir/contracts' ]; then
-    echo
-  else
-    cp -r /contracts /opt/eosio/bin/data-dir
+if [ "`ls -A /opt/eosio/bin/contracts`" = "" ]; then
+    cp -r /contracts /opt/eosio/bin
 fi
 
-exec /opt/eosio/bin/nodeos --data-dir=/opt/eosio/bin/data-dir --config-dir=/opt/eosio/bin/config-dir $@
+DATA_DIR=/opt/eosio/bin/data-dir
+CONFIG_DIR=/opt/eosio/bin/config-dir
+
+exec /opt/eosio/bin/nodeos --data-dir $DATA_DIR --config-dir $CONFIG_DIR > $DATA_DIR/stderr.txt 2> $DATA_DIR/stdout.txt $@

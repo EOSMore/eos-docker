@@ -14,12 +14,14 @@ services:
     volumes:
       - ./data-dir:/opt/eosio/bin/data-dir
       - ./config-dir:/opt/eosio/bin/config-dir
+      - ./contracts:/opt/eosio/bin/contracts
 
   walletd:
     image: eosio/eos
-    command: /opt/eosio/bin/eosiowd
+    command: /opt/eosio/bin/keosd
     links:
       - eos
     volumes:
       - ./data-dir:/opt/eosio/bin/data-dir
       - ./config-dir:/opt/eosio/bin/config-dir
+      - ./contracts:/opt/eosio/bin/contracts
